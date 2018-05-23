@@ -1,0 +1,82 @@
+yum install php-gd
+================================
+JDK
+
+Check Java Version: 
+> java -version
+> javac -version
+
+
+==============================
+
+/home/gcufhost/rpm/
+
+
+1. Download oracle instant client (basic and devel) from:
+
+http://www.oracle.com/technology/software/tech/oci/instantclient/htdocs/linuxsoft.html
+
+2. Install the basic and development package.
+
+[root@ptm ] rpm -Uvh oracle-instantclient-basic-<VERSION>.x86_64.rpm
+[root@ptm ] rpm -Uvh oracle-instantclient-devel-<VERSION>.x86_64.rpm
+
+3. Link the installation dynamically
+
+[root@ptm ] echo /usr/include/oracle/11.2/client/lib/ > /etc/ld.so.conf.d/oracle_client.conf
+
+//// Server 64 Bit /// [root@ptm ] echo /usr/include/oracle/11.2/client64/lib/ > /etc/ld.so.conf.d/oracle_client.conf
+
+[root@ptm ] ldconfig -v
+
+4. Download oci8 package from:
+
+http://pecl.php.net/package/oci8
+
+5. Extract and install the package
+
+tar xvzf oci8-1.4.9.tgz
+
+[root@ptm oci8-1.4.5] phpize
+	
+	if not working... 
+	yum -y install php-devel
+	OR
+	rpm -Uvh php-dev.....
+
+
+[root@ptm oci8-1.4.5] ./configure -with-oci8=shared,instantclient,/usr/lib/oracle/11.2/client/lib/
+
+//// Server 64 Bit /// [root@ptm oci8-1.4.5] ./configure -with-oci8=shared,instantclient,/usr/lib/oracle/11.2/client64/lib/
+
+if above line return error:
+yum install gcc
+
+[root@ptm oci8-1.4.5] make
+[root@ptm oci8-1.4.5] make install
+
+6.  Add the library shared object for PHP
+
+[root@ptm oci8-1.4.5] echo extension=oci8.so > /etc/php.d/oci8.ini
+
+7. restart Apache
+
+8. In phpinfo should now see that oci8 support is now enabled.
+
+
+===
+Server
+==
+http://forums.cpanel.net/f145/oracle-easyapache-140437.html
+
+oracle-instantclient11.2-odbc-11.2.0.3.0-1.x86_64.rpm
+
+pecl install oci8
+
+Enable PDO in EasyAppache
+
+
+pear install MDB2_Driver_oci8-1.5.0b4
+
+
+Enable PDO ...
