@@ -1,0 +1,10 @@
+https://www.youtube.com/watch?v=L7l0W5YkAts
+
+yum install samba-client
+yum install cifs-utils
+
+smbclient -L 192.168.1.3 -U hassan
+
+mkdir /Oracle2
+
+mount -o username=hassan //192.168.1.3/Oracle2 /Oracle2
