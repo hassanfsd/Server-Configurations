@@ -1,0 +1,14 @@
+http://php.net/manual/en/imagick.setup.php
+
+
+yum install ImageMagick
+yum install ImageMagick-devel
+
+1) yum install php-devel
+2) cd /usr
+3) wget http://pear.php.net/go-pear.phar
+4) php go-pear.phar
+5) //See the following line in /etc/php.ini [include_path=".:/usr/PEAR"]
+6) pecl install imagick
+7) Add the following line in /etc/php.ini [extension=imagick.so]
+8) service httpd restart
