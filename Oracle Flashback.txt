@@ -1,0 +1,7 @@
+show parameter undo;
+
+EXPDP TABLE
+
+alter table scott.dept enable row movement;
+
+flashback table scott.dept to timestamp to_timestamp('09-10-14 07:43', 'DD-MM-YY HH24:MI');
